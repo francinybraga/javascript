@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+}
+
+#tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.casa {
+    width: 60px;
+    height: 60px;
+    background-color: gray;
+    border: 2px solid black;
+}

@@ -147,4 +147,4 @@ let matriz = [
 console.log(matriz[1][1])
 console.log(matriz.flat())
 console.log(frutas.join(" , "))
-console.log(frutas.split(" , "))
+let texto = "pera, maçã, banana, laranja";
