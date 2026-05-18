@@ -1,21 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
 body {
     text-align: center;
+    background: radial-gradient(circle at top, #252525, #000000);
+    min-height: 100vh;
+    color: rgb(255, 255, 255);
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+    padding-top: 60px;
+}
+.bomba-fundo{
+
+    position: fixed;
+
+    top: -100px;
+
+    font-size: 30px;
+
+    opacity: 0.5;
+
+    pointer-events: none;
+
+    animation-name: cair;
+
+    animation-timing-function: linear;
+
+    animation-iteration-count: infinite;
+
+    filter: drop-shadow(0 0 10px red);
+
+    text-shadow:
+        0 0 5px red,
+        0 0 10px orange,
+        0 0 20px yellow;
+        .bomba-fundo {
+    animation: cair 4s linear infinite, bombaPulse 1.8s ease-in-out infinite;
+}
+}
+@keyframes bombaPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+        filter: drop-shadow(0 0 12px red);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+}
+@keyframes cair{
+
+    from{
+        transform: translateY(-100px) rotate(0deg);
+    }
+
+    to{
+        transform: translateY(120vh) rotate(360deg);
+    }
 }
 
+/* Tabuleiro */
 #tabuleiro {
+
     display: grid;
+
     grid-template-columns: repeat(5, 60px);
+
     gap: 5px;
+
     justify-content: center;
+
     margin-top: 20px;
+
     width: fit-content;
+
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Casas */
 .casa {
+
     width: 60px;
     height: 60px;
-    background-color: gray;
-    border: 2px solid black;
+
+    background-color: #7606aa;
+
+    border: 2px solid #222;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    border-radius: 8px;
+
+    user-select: none;
+}
+
+/* Hover */
+.casa:hover {
+
+    transform: scale(1.05);
+
+    background-color: #4a0e6d;
+}
+
+/* Botão */
+button {
+
+    margin-top: 30px;
+
+    padding: 10px 20px;
+
+    font-size: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background-color: #575656;
+
+    color: rgb(255, 255, 255);
+
+    transition: 0.2s;
+}
+
+/* Hover botão */
+button:hover {
+
+    background-color: #ffffff;
+
+    transform: scale(1.05);
+}
+
+/* Classe da bomba */
+.bomba {
+
+    animation: explodir 0.6s ease;
+}
+
+/* Explosão */
+@keyframes explodir {
+
+    0%{
+        transform: scale(1);
+    }
+
+    20%{
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    40%{
+        transform: translateX(5px) rotate(5deg);
+    }
+
+    60%{
+        transform: scale(1.5);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}
+.fim {
+    font-size: 60px;
+    font-weight: 900;
+    letter-spacing: 5px;
+
+    color: #ff3b3b;
+
+    text-shadow:
+        2px 2px 0 #000,
+        0 0 20px rgba(255, 0, 0, 0.4),
+        0 0 40px rgba(0, 0, 0, 0.9);
+
+    animation: pulsarGameOver 1s infinite alternate;
+}
+
+@keyframes pulsarGameOver {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+.titulo {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+
+    color: #eaeaea;
+
+    text-shadow:
+        0 2px 0 #000,
+        0 10px 25px rgba(0,0,0,0.9);
+
+    animation: tituloFlutua 3.5s ease-in-out infinite;
+}
+.titulo::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 2px;
+    margin: 8px auto 0;
+    background: #ff2e2e;
+    opacity: 0.5;
+}
+@keyframes tituloFlutua {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
