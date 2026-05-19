@@ -1,0 +1,284 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #e628e6, #4872fa);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+    z-index: 2;
+}
+
+#game-container,
+#placar {
+    position: relative;
+    z-index: 2;
+}
+
+#placar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+
+    z-index: 10;
+
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 12px;
+    border-radius: 10px;
+
+    color: white;
+    font-family: Arial, sans-serif;
+
+    backdrop-filter: blur(5px);
+}
+
+#placar table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#placar th,
+#placar td {
+    padding: 6px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+}
+
+#placar th {
+    background: rgba(0, 188, 212, 0.3);
+    font-weight: bold;
+}
+
+#placar td {
+    font-size: 18px;
+}
+
+#jogadorAtual {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #00bcd4;
+}
+
+h1 {
+
+    font-family: "Luckiest Guy", cursive;
+    font-size: 70px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(0, 188, 212, 0.6);
+    text-transform: uppercase;
+
+    color: #00bcd4;
+
+    text-shadow:
+        0 0 5px #00bcd4,
+        0 0 15px #00bcd4,
+        0 0 30px rgba(0, 188, 212, 0.6);
+
+    margin-bottom: 20px;
+
+
+    animation: pulseTitle 3s infinite ease-in-out;
+}
+
+@keyframes pulseTitle {
+
+    0%,
+    100% {
+        transform: scale(1);
+        text-shadow:
+            0 0 5px #00bcd4,
+            0 0 15px #00bcd4;
+    }
+
+    50% {
+        transform: scale(1.05);
+        text-shadow:
+            0 0 10px #ff4081,
+            0 0 25px #ff4081;
+    }
+}
+
+#background-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    z-index: 2;
+}
+
+.numero {
+  position: absolute;
+  top: -50px;
+
+  font-family: monospace;
+  font-size: 20px;
+
+  color: rgba(255,255,255,0.9);
+
+  text-shadow:
+    0 0 5px #00bcd4,   /* azul */
+    0 0 10px #00bcd4,
+    0 0 15px #ff4081,  /* rosa */
+    0 0 25px #ff4081;
+
+  animation: cair linear forwards;
+}
+
+@keyframes cair {
+    from {
+        transform: translateY(-50px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+/* garante que o jogo fica na frente */
+h1,
+#tabuleiro {
+    position: relative;
+    z-index: 2;
+}
+
+#tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    grid-template-rows: repeat(6, 60px);
+    gap: 6px;
+
+    justify-content: center;
+    align-content: center;
+
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+}
+
+.carta {
+    width: 60px;
+    height: 60px;
+
+    background: linear-gradient(145deg, #2b2b2b, #1a1a1a);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 10px;
+
+    transition: all 0.2s ease;
+    user-select: none;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.carta.virada {
+    transform: scale(1.05);
+}
+.carta.j1.virada {
+    background: #00bcd4 !important;
+    color: black;
+}
+
+.carta.j2.virada {
+    background: #ff4081 !important;
+    color: white;
+}
+.carta.encontrada {
+    background: #80cfda;
+    /* azul */
+    color: white;
+    cursor: default;
+    transform: scale(0.95);
+    opacity: 0.9;
+}
+
+
+body[data-jogador="1"] .carta:hover {
+    background: #00bcd4 !important;
+    transform: scale(1.08);
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+body[data-jogador="2"] .carta:hover {
+    background: #ff4081 !important;
+    transform: scale(1.08);
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+#tela-vitoria {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
+    font-weight: bold;
+
+    z-index: 999;
+    text-align: center;
+}
+
+.confete {
+    position: fixed;
+    top: -10px;
+
+    width: 8px;
+    height: 12px;
+
+    z-index: 1000;
+
+    animation: cairConfete linear forwards;
+}
+
+@keyframes cairConfete {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
